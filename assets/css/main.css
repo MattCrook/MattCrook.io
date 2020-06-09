@@ -3858,3 +3858,10 @@ body.is-menu-visible #menu {
   height: 100%;
   border: 1px solid black; 
 }
+
+.flex-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  text-align: left;
+}
