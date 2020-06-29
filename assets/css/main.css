@@ -923,6 +923,10 @@ table.alt tbody tr td {
 }
 
 /* Highlights */
+
+#spotlight_card {
+  width: 600px;
+}
 .highlights {
   width: 100%;
   margin: 2.5rem 0;
@@ -2499,6 +2503,15 @@ ul.icons li .icon:before {
 }
 
 /* Wrapper */
+
+#wrapper_spotlights {
+  margin: 0;
+}
+
+#wrapper_spotlights_last {
+  padding-bottom: 0;
+  padding-top: 0;
+}
 .wrapper {
   padding: 8rem 0 6rem 0;
   position: relative;
