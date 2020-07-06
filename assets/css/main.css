@@ -926,6 +926,7 @@ table.alt tbody tr td {
 
 #spotlight_card {
   width: 600px;
+  margin-left: 25px;
 }
 .highlights {
   width: 100%;
