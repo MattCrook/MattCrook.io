@@ -2552,10 +2552,11 @@ ul.icons li .icon:before {
   -webkit-justify-content: center;
   -ms-justify-content: center;
   justify-content: center;
-  background-image: url("../../images/Invictus-Zoom.png");
-  background-position: center;
+  background-image: url("../../images/invictus-wallpaper.jpg");
+  background-size: 67%;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-position: center;
+  /* background-size: cover; */
   border-top: 0;
   display: -ms-flexbox;
   height: 35rem !important;
@@ -2564,6 +2565,8 @@ ul.icons li .icon:before {
   position: relative;
   text-align: center;
   width: 100%;
+  /* background-position: right; */
+
 }
 #banner input,
 #banner select,
