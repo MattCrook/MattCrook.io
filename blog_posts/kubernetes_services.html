@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <title>Blog</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+      integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ="
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body class="is-preload">
+    <!-- Header -->
+    <header id="header">
+      <a class="logo" href="../index.html">Home</a>
+      <a class="logo" href="../aboutMe.html">About</a>
+      <a class="logo" href="../blog.html">Blog</a>
+      <a class="logo" href="#contact-anchor">Contact</a>
+    </header>
+
+    <!-- Nav -->
+
+    <!-- Heading -->
+    <div id="heading">
+      <h1>Kubernetes Services</h1>
+    </div>
+
+    <!-- Main -->
+    <section id="main" class="wrapper">
+      <div class="inner">
+        <div class="content">
+          <!-- <h3>Coming Soon!</h3> -->
+          <h3>What is A Kubernetes Service?</h3>
+          <p>
+            A service in Kubernetes is a component just like a pod, but it's not a process, it's an abstraction layer
+            that represents an IP Address. By creating a service, you now have a single and stable IP address and port
+            that you can hit to access your pods. This address will remain unchanged throughout the whole lifetime of
+            the service. Pods behind this service may come and go, their IPs may change, their number can go up or down,
+            but they’ll always be accessible through the service’s single and constant IP address.
+          </p>
+          <p>There are (4) main services in Kubernetes:</p>
+          <ul>
+            <strong><li>ClusterIP</li></strong>
+            <strong><li>NodePort</li></strong>
+            <strong><li>Headless</li></strong>
+            <strong><li>Loadbalancer</li></strong>
+          </ul>
+          <p>
+            In a Kubernetes cluster, each pod gets its own internal IP address. It is important to remember though, that
+            pods are Ephemeral, meaning the pods come and go (destroyed) very frequently. When a new pod is started, and
+            a new pod takes the old one's place, it takes on a new IP address. So for this reason, it doesn't make sense
+            to use pod IP addresses directly because you would have to adjust that every time a new pod gets created.
+            With a service, you can have a stable IP address that stays even when a pod dies or a new one is created.
+            Services are a good <strong>abstraction</strong> for loose coupling for communication within the cluster.
+          </p>
+          <p>
+            In short, the <em>service</em> creates a persistent IP address in your cluster (because pods are ephemeral)
+            which is how everything else connects to it. The <em>Deployment</em> creates a <em>ReplicaSet</em>, which
+            creates a <em>Pod</em>, and this Pod is the backend for that <em>service</em>.
+          </p>
+          <hr />
+
+          <h3>Service Communication</h3>
+          <p>
+            A service identifies its member pods or its endpoint pods using a <strong>selector</strong> attribute. In
+            the service specification, in the <code>.yaml</code> file from which we create the service, we specify the
+            selector attribute that has key, value pairs defined as a list. The key, value pairs are basically labels
+            the pods should have, to match that selector.
+            <ul>
+            <li>
+              The Deployment component describes the state you want, and the state you want Kubernetes to always
+              maintain, in regards to your Pods.
+            </li>
+            <li>
+              In your Deployment, you will specify labels, which is an arbitrary key-value pair you attach to a
+              resource, which is then utilized when selecting resources using label selectors (resources are filtered
+              based on whether they include the label specified in the selector). <em>A resource can have more than one
+              label, as long as the keys of those labels are unique within that resource</em>.
+            </li>
+            <li>Label selectors allow you to select a subset of pods tagged with certain labels and perform an operation on those pods.</li>
+            <li>So, for the service, any pod tagged with the label that matches the selector that the service specifies, will be grouped under that service.</li>
+        </ul>
+    </p>
+    <h4>Endpoints</h4>
+    <p>However, Services don’t  link  to  pods  directly.  Instead,  a  resource  sits in  between — the <strong>Endpoints</strong> resource. Although  the  pod  selector  is  defined  in  the  service  spec,  it’s  not used  directly  when redirecting  incoming  connections. Instead,  the  selector  is  used  to build  a  list  of  IPs and ports, which is then stored in the <strong>Endpoints</strong> resource.</p>
+    <p>When a client connects to a service,  the  service  proxy  selects  one  of  those  IP  and  port  pairs  and  redirects  the incoming connection to the server listening at that location.</p>
+    <p>So in simple terms, the Endpoints object keeps a running list of all the pod's IP Addresses, so the service can forward requests to them. This is an important abstraction layer, because as pods are deleted, created, shut down, or die...they are either added to or removed from the Endpoints object.</p>
+    <img id="blog_image" src="./media/ServiceEndpoints.png" alt="" style="width: 52%; margin-left: 24%;"/>
+    <hr />
+
+    <h3>Service Discovery</h3>
+    <p>By creating a service, you now have a single and stable IP address and port that you can  hit  to  access  your  pods.  
+      This  address  will  remain  unchanged  throughout  the whole lifetime of the service. Pods behind this service may come and go, their IPs may change, 
+      their number can go up or down, but they’ll always be accessible through the service’s single and constant IP address.</p>
+      <h4>Discovery through IP Addresses</h4>
+      <p>When a pod is started, Kubernetes initializes a set of environment variables pointing to each service that exists at that moment. 
+        If you create the service before creating the client pods, processes in those pods can get the IP address and port of the service by inspecting 
+        their environment variables.</p>
+        <p> You can see the pod env variables, and env variables relating to the service that the pod is communicating with by running <code>kubectl exec POD_NAME -- env</code></p>
+
+
+      <h4>Discovery through DNS</h4>
+      <p>As the name suggests, the pod runs a DNS server, which all other pods running in the  cluster  are  automatically  configured  to  use  <em>(Kubernetes does that by modifying each container’s /etc/resolv.conf file)</em>. </p>
+      <ul>
+        <li>Any DNS query performed by a process running in a pod will be handled by Kubernetes’ own DNS server, which knows all the services running in your system.</li>
+        <li>Each service gets a DNS entry in the internal DNS server, and client pods that know the name of the service can access it through its <em>fully qualified domain name (FQDN)</em> instead of resorting to environment variables.</li>
+        <li>Important to note, that the service’s ClusterIP is a virtual IP, and only has meaning when combined with the service port. This could be why curling a service works, but pinging it doesn't.</li>
+      </ul>
+      <hr />
+      <p>After both the Service and Endpoints resource are posted to the server, the service is ready to be used like any regular service with a pod selector. 
+        Containers created after the service is created will include the environment variables for the service, and all connections to it's IP:port pair will be load balanced between the service's endpoints. </p>
+        <img src="./media/SvcPod.png" alt="" style="width: 52%; margin-left: 24%;"/>
+        <div class="date_blog_written">
+          <em><p>Written June 13, 2021</p></em>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer" class="blog_footer_container">
+      <div class="inner">
+        <div id="contact-anchor" class="contact_blog">
+          <a href="mailTo:matt.crook11@gmail.com"><i class="fas fa-envelope">&nbsp;</i></a>
+          <a href="https://twitter.com/mgcrook"><i class="fab fa-twitter-square">&nbsp;</i></a>
+          <a href="https://www.facebook.com/matt.crook.18"><i class="fab fa-facebook">&nbsp;</i></a>
+          <a href="https://www.linkedin.com/in/mattcrook11/"><i class="fab fa-linkedin">&nbsp;</i></a>
+          <a href="https://github.com/MattCrook"><i class="fab fa-github">&nbsp;</i></a>
+        </div>
+        <!-- <div class="content">
+          <section>
+            <h3 id="contact-anchor">Contact</h3>
+            <p>matt.crook11@gmail.com</p>
+            <img src="../images/IMG_0367.JPG" alt="" />
+          </section>
+          <section>
+            <h4>Resume</h4>
+            <ul class="alt">
+
+              <li>
+                <a
+                  href="https://www.canva.com/design/DAEEUyn_MJs/7q6wd79z0nIJu-od1rucOA/view?utm_content=DAEEUyn_MJs&utm_campaign=designshare&utm_medium=link&utm_source=sharebutton"
+                  >Matt Crook Resume</a
+                >
+              </li>
+
+            </ul>
+          </section>
+          <section>
+            <h4>Social Media</h4>
+            <ul class="plain">
+              <li>
+                <a href="https://twitter.com/mgcrook"><i class="fab fa-twitter-square">&nbsp;</i>Twitter</a>
+              </li>
+              <li>
+                <a href="https://www.facebook.com/matt.crook.18"><i class="fab fa-facebook">&nbsp;</i>Facebook</a>
+              </li>
+              <li>
+                <a href="https://www.linkedin.com/in/mattcrook11/"><i class="fab fa-linkedin">&nbsp;</i>LinkedIn</a>
+              </li>
+              <li>
+                <a href="https://github.com/MattCrook"><i class="fab fa-github">&nbsp;</i>Github</a>
+              </li>
+            </ul>
+          </section>
+        </div> -->
+        <div class="copyright">
+          &copy; Matt Crook. Photos <a href="https://unsplash.co">Unsplash</a>, Video
+          <a href="https://coverr.co">Cover</a>.
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/browser.min.js"></script>
+    <script src="../assets/js/breakpoints.min.js"></script>
+    <script src="../assets/js/util.js"></script>
+    <script src="../assets/js/main.js"></script>
+  </body>
+</html>

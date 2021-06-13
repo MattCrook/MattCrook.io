@@ -1,89 +1,105 @@
 <!DOCTYPE html>
 
 <html lang="en">
+  <head>
+    <title>Blog</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+      integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ="
+      crossorigin="anonymous"
+    />
+  </head>
 
-<head>
-	<title>Blog</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="assets/css/main.css" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
-		integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
-</head>
+  <body class="is-preload">
+    <!-- Header -->
+    <header id="header">
+      <a class="logo" href="index.html">Home</a>
+      <a class="logo" href="aboutMe.html">About</a>
+      <a class="logo" href="blog.html">Blog</a>
+      <a class="logo" href="#contact-anchor">Contact</a>
+    </header>
 
-<body class="is-preload">
+    <!-- Nav -->
 
-	<!-- Header -->
-	<header id="header">
-		<a class="logo" href="index.html">Home</a>
-		<a class="logo" href="aboutMe.html">About</a>
-		<a class="logo" href="blog.html">Blog</a>
-		<a class="logo" href="#contact-anchor">Contact</a>
+    <!-- Heading -->
+    <div id="heading">
+      <h1>Blog</h1>
+    </div>
 
-	</header>
+    <!-- Main -->
+    <section id="main" class="wrapper">
+      <div class="inner">
+        <div class="content">
+          <!-- <h3>Coming Soon!</h3> -->
+          <h3><a class="blog_title" href="./blog_posts/kubernetes_services.html">Kubernetes Services</a></h3>
+          <p>
+            A service in Kubernetes is a component just like a pod, but it's not a process, it's an abstraction layer
+            that represents an IP Address. By creating a service, you now have a single and stable IP address and port
+            that you can hit to access your pods. This address will remain unchanged throughout the whole lifetime of
+            the service. Pods behind this service may come and go, their IPs may change, their number can go up or down,
+            but they’ll always be accessible through the service’s single and constant IP address.
+          </p>
+		  <div><a class="blog_link_text" href="./blog_posts/kubernetes_services.html">READ MORE</a></div>
+        </div>
+      </div>
+    </section>
 
-	<!-- Nav -->
+    <!-- Footer -->
+    <footer id="footer">
+      <div class="inner">
+        <div class="content">
+          <section>
+            <h3 id="contact-anchor">Contact</h3>
+            <p>matt.crook11@gmail.com</p>
+            <img src="./images/IMG_0367.JPG" alt="" />
+          </section>
+          <section>
+            <h4>Resume</h4>
+            <ul class="alt">
+              <!-- <li><a href="https://standardresume.co/r/matthew-crook-74884">Matt Crook Resume</a></li> -->
+              <li>
+                <a
+                  href="https://www.canva.com/design/DAEEUyn_MJs/7q6wd79z0nIJu-od1rucOA/view?utm_content=DAEEUyn_MJs&utm_campaign=designshare&utm_medium=link&utm_source=sharebutton"
+                  >Matt Crook Resume</a
+                >
+              </li>
+              <!-- <li><a href="#">Matt Crook Cover Letter</a></li> -->
+            </ul>
+          </section>
+          <section>
+            <h4>Social Media</h4>
+            <ul class="plain">
+              <li>
+                <a href="https://twitter.com/mgcrook"><i class="fab fa-twitter-square">&nbsp;</i>Twitter</a>
+              </li>
+              <li>
+                <a href="https://www.facebook.com/matt.crook.18"><i class="fab fa-facebook">&nbsp;</i>Facebook</a>
+              </li>
+              <li>
+                <a href="https://www.linkedin.com/in/mattcrook11/"><i class="fab fa-linkedin">&nbsp;</i>LinkedIn</a>
+              </li>
+              <li>
+                <a href="https://github.com/MattCrook"><i class="fab fa-github">&nbsp;</i>Github</a>
+              </li>
+            </ul>
+          </section>
+        </div>
+        <div class="copyright">
+          &copy; Matt Crook. Photos <a href="https://unsplash.co">Unsplash</a>, Video
+          <a href="https://coverr.co">Cover</a>.
+        </div>
+      </div>
+    </footer>
 
-
-	<!-- Heading -->
-	<div id="heading">
-		<h1>Blog</h1>
-	</div>
-
-	<!-- Main -->
-	<section id="main" class="wrapper">
-		<div class="inner">
-			<div class="content">
-			<h3>Coming Soon!</h3>
-			</div>
-		</div>
-	</section>
-
-
-	<!-- Footer -->
-	<footer id="footer">
-		<div class="inner">
-			<div class="content">
-				<section>
-					<h3 id="contact-anchor">Contact</h3>
-					<p>matt.crook11@gmail.com</p>
-					<img src="./images/IMG_0367.JPG" alt="" />
-				</section>
-				<section>
-					<h4>Resume</h4>
-					<ul class="alt">
-						<!-- <li><a href="https://standardresume.co/r/matthew-crook-74884">Matt Crook Resume</a></li> -->
-						<li><a href="https://www.canva.com/design/DAEEUyn_MJs/7q6wd79z0nIJu-od1rucOA/view?utm_content=DAEEUyn_MJs&utm_campaign=designshare&utm_medium=link&utm_source=sharebutton">Matt Crook Resume</a></li>
-						<!-- <li><a href="#">Matt Crook Cover Letter</a></li> -->
-					</ul>
-				</section>
-				<section>
-					<h4>Social Media</h4>
-					<ul class="plain">
-						<li><a href="https://twitter.com/mgcrook"><i class="fab fa-twitter-square">&nbsp;</i>Twitter</a>
-						</li>
-						<li><a href="https://www.facebook.com/matt.crook.18"><i
-									class="fab fa-facebook">&nbsp;</i>Facebook</a></li>
-						<li><a href="https://www.linkedin.com/in/mattcrook11/"><i
-									class="fab fa-linkedin">&nbsp;</i>LinkedIn</a></li>
-						<li><a href="https://github.com/MattCrook"><i class="fab fa-github">&nbsp;</i>Github</a></li>
-					</ul>
-				</section>
-			</div>
-			<div class="copyright">
-				&copy; Matt Crook. Photos <a href="https://unsplash.co">Unsplash</a>, Video <a
-					href="https://coverr.co">Cover</a>.
-			</div>
-		</div>
-	</footer>
-
-	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/browser.min.js"></script>
-	<script src="assets/js/breakpoints.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
-
-</body>
-
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
 </html>
